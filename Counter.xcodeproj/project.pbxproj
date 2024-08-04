@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0A52062C5FB42700FCA02A /* ShareSocialMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A52052C5FB42700FCA02A /* ShareSocialMediaView.swift */; };
 		5E7009BB2C51BE69007671B2 /* CounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7009BA2C51BE69007671B2 /* CounterApp.swift */; };
 		5E7009BD2C51BE69007671B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7009BC2C51BE69007671B2 /* ContentView.swift */; };
 		5E7009BF2C51BE6C007671B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E7009BE2C51BE6C007671B2 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E0A52052C5FB42700FCA02A /* ShareSocialMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSocialMediaView.swift; sourceTree = "<group>"; };
 		5E7009B72C51BE69007671B2 /* Counter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E7009BA2C51BE69007671B2 /* CounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterApp.swift; sourceTree = "<group>"; };
 		5E7009BC2C51BE69007671B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				5E7009EA2C51C63D007671B2 /* Info.plist */,
 				5E7009BA2C51BE69007671B2 /* CounterApp.swift */,
 				5E7009BC2C51BE69007671B2 /* ContentView.swift */,
+				5E0A52052C5FB42700FCA02A /* ShareSocialMediaView.swift */,
 				5E7009EB2C51C83D007671B2 /* IntervalSelectionButton.swift */,
 				5E7009FF2C5664ED007671B2 /* UtilityCodes.swift */,
 				5E9AA8342C5AFCD0007D0E6A /* HistoryView.swift */,
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7009E52C51BEB8007671B2 /* AnimatedColorBackgroundView.swift in Sources */,
+				5E0A52062C5FB42700FCA02A /* ShareSocialMediaView.swift in Sources */,
 				5E7009F02C52EFBD007671B2 /* FlashingBWBackgroundView.swift in Sources */,
 				5E7009BD2C51BE69007671B2 /* ContentView.swift in Sources */,
 				5E7009EC2C51C83D007671B2 /* IntervalSelectionButton.swift in Sources */,

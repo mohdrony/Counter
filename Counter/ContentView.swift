@@ -38,6 +38,23 @@ struct ContentView: View {
 
     var body: some View {
         VStack{
+            
+            ZStack {
+                BackgroundView(isTapped: $isTapped, isVibrationOn: $isVibrationOn, isAnimationOn: $isAnimationOn, isFlashingColorsOn: $isFlashingColorsOn, selectedTheme: $selectedTheme, isCountTextBlack: $isCountTextBlack, selectedColor: $selectedColor)
+                    
+                
+                ZStack {
+                    CountTextBackground(isAnimationOn: $isAnimationOn, isTapped: $isTapped, selectedTextBackgroundTheme: $selectedTextBackgroundTheme, isCountTextBlack: (selectedTheme == .lightTheme ? .constant(false) : $isCountTextBlack), isInterval1Reached: $isInterval1Reached, isInterval2Reached: $isInterval2Reached)
+                    Text("\(count)")
+                        .font(.custom("Karantina", size: 200)).minimumScaleFactor(0.2).lineLimit(1).frame(maxWidth: 220)
+                        .foregroundColor((selectedTheme == .lightTheme) ? .white : (isCountTextBlack ? .black : .white))
+                }
+            }
+            .onTapGesture {
+                mainTapActions()
+            }
+            
+            ZStack(alignment: .top){
             HStack {
                 Button(action: {
                     resetCount()
@@ -84,25 +101,7 @@ struct ContentView: View {
             }
             .padding()
             .frame(width: UIScreen.main.bounds.width)
-            ZStack {
-                BackgroundView(isTapped: $isTapped, isVibrationOn: $isVibrationOn, isAnimationOn: $isAnimationOn, isFlashingColorsOn: $isFlashingColorsOn, selectedTheme: $selectedTheme, isCountTextBlack: $isCountTextBlack, selectedColor: $selectedColor)
-                    .onTapGesture {
-                        mainTapActions()
-                    }
-                
-                ZStack {
-                    CountTextBackground(isAnimationOn: $isAnimationOn, isTapped: $isTapped, selectedTextBackgroundTheme: $selectedTextBackgroundTheme, isCountTextBlack: (selectedTheme == .lightTheme ? .constant(false) : $isCountTextBlack), isInterval1Reached: $isInterval1Reached, isInterval2Reached: $isInterval2Reached)
-                    Text("\(count)")
-                        .font(.custom("Karantina", size: 200)).minimumScaleFactor(0.2).lineLimit(1).frame(maxWidth: 220)
-                        .foregroundColor((selectedTheme == .lightTheme) ? .white : (isCountTextBlack ? .black : .white))
-                }
-            }
-            .onChange(of: count) { newValue in
-                checkIntervals(newValue)
-            }
         }
-        ZStack {
-            
         }
         .onChange(of: count) { newValue in
             checkIntervals(newValue)
