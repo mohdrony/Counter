@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HistoryView: View {
     @Binding var historyRecords: [HistoryRecord]
-    let onSelectRecord: (HistoryRecord) -> Void
+//    let onSelectRecord: (HistoryRecord) -> Void
 
     @State private var editMode = EditMode.inactive
 
@@ -17,11 +17,11 @@ struct HistoryView: View {
         NavigationView {
             List {
                 ForEach(historyRecords.indices, id: \.self) { index in
-                    Button(action: {
-                        if editMode == .inactive {
-                            onSelectRecord(historyRecords[index])
-                        }
-                    }) {
+                    
+                    NavigationLink{ShareSocialMediaView(historyRecord: historyRecords[index]){ selectedRecord in
+                        count = selectedRecord.count
+                        isHistoryViewShowing = false
+                    }} label:{
                         HStack{
                             VStack(alignment: .leading) {
                                 TextField("Name", text: $historyRecords[index].name)
@@ -38,6 +38,7 @@ struct HistoryView: View {
                             }
                         }
                     }
+                    
                 }
                 .onDelete { indices in
                     historyRecords.remove(atOffsets: indices)

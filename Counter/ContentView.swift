@@ -37,7 +37,7 @@ struct ContentView: View {
     @State private var historyRecords: [HistoryRecord] = []
 
     var body: some View {
-        VStack{
+        ZStack{
             
             ZStack {
                 BackgroundView(isTapped: $isTapped, isVibrationOn: $isVibrationOn, isAnimationOn: $isAnimationOn, isFlashingColorsOn: $isFlashingColorsOn, selectedTheme: $selectedTheme, isCountTextBlack: $isCountTextBlack, selectedColor: $selectedColor)
@@ -54,7 +54,7 @@ struct ContentView: View {
                 mainTapActions()
             }
             
-            ZStack(alignment: .top){
+            VStack{
             HStack {
                 Button(action: {
                     resetCount()
@@ -101,6 +101,7 @@ struct ContentView: View {
             }
             .padding()
             .frame(width: UIScreen.main.bounds.width)
+                Spacer()
         }
         }
         .onChange(of: count) { newValue in
@@ -125,10 +126,7 @@ struct ContentView: View {
             )
         }
         .sheet(isPresented: $isHistoryViewShowing) {
-                    HistoryView(historyRecords: $historyRecords) { selectedRecord in
-                        count = selectedRecord.count
-                        isHistoryViewShowing = false
-                    }
+                    HistoryView(historyRecords: $historyRecords)
                 }
     }
 
