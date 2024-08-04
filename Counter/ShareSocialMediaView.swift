@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct ShareSocialMediaView: View {
+    @Binding var count: Int
+    var historyRecord: HistoryRecord
+    let onSelectRecord: (HistoryRecord) -> Void
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            onSelectRecord(historyRecord)
+        }){
+            Text("Continue")
+        }
     }
 }
 
 #Preview {
-    ShareSocialMediaView()
+    ShareSocialMediaView(historyRecord: HistoryRecord(count: 20, date: Date(), name: "Push Ups"), onSelectRecord: { record in
+        print("Selected record: \(record.name), Count: \(record.count)")
+    })
 }
