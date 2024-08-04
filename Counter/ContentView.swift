@@ -37,68 +37,72 @@ struct ContentView: View {
     @State private var historyRecords: [HistoryRecord] = []
 
     var body: some View {
-        ZStack {
-            BackgroundView(isTapped: $isTapped, isVibrationOn: $isVibrationOn, isAnimationOn: $isAnimationOn, isFlashingColorsOn: $isFlashingColorsOn, selectedTheme: $selectedTheme, isCountTextBlack: $isCountTextBlack, selectedColor: $selectedColor)
-                .onTapGesture {
-                    setupVolumeButtonListener()
+        VStack{
+            HStack {
+                Button(action: {
+                    resetCount()
+                }) {
+                    ZStack(alignment: .center) {
+                        Circle().fill(.clear).frame(width: 65)
+                        Image(systemName: "arrow.uturn.backward.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
+                            .overlay {
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 2)
+                                    .foregroundColor(.green)
+                            }.frame(height: 40)
+                    }
                 }
-            
-            ZStack {
-                CountTextBackground(isAnimationOn: $isAnimationOn, isTapped: $isTapped, selectedTextBackgroundTheme: $selectedTextBackgroundTheme, isCountTextBlack: (selectedTheme == .lightTheme ? .constant(false) : $isCountTextBlack), isInterval1Reached: $isInterval1Reached, isInterval2Reached: $isInterval2Reached)
-                Text("\(count)")
-                    .font(.custom("Karantina", size: 200)).minimumScaleFactor(0.2).lineLimit(1).frame(maxWidth: 220)
-                    .foregroundColor((selectedTheme == .lightTheme) ? .white : (isCountTextBlack ? .black : .white))
-            }
-            
-            VStack {
-                HStack {
+                Spacer()
+                HStack{
                     Button(action: {
-                        resetCount()
+                        isSettingSheetShowing.toggle()
                     }) {
-                        ZStack(alignment: .center) {
-                            Circle().fill(.clear).frame(width: 65)
-                            Image(systemName: "arrow.uturn.backward.circle.fill")
+                        ZStack {
+                            Image(systemName: "info.circle.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
-                                .overlay {
-                                    Circle()
-                                        .stroke(Color.white, lineWidth: 2)
-                                        .foregroundColor(.green)
-                                }.frame(height: 40)
                         }
+                        .frame(height: 40)
                     }
-                    Spacer()
-                    HStack{
-                        Button(action: {
-                            isSettingSheetShowing.toggle()
-                        }) {
-                            ZStack {
-                                Image(systemName: "info.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
-                            }
-                            .frame(height: 40)
+                    Button(action: {
+                        isHistoryViewShowing.toggle()
+                    }) {
+                        ZStack {
+                            Image(systemName: "arrow.up.right.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
                         }
-                        Button(action: {
-                            isHistoryViewShowing.toggle()
-                        }) {
-                            ZStack {
-                                Image(systemName: "arrow.up.right.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
-                            }
-                            .frame(height: 40)
-                        }
-                    }.padding(.trailing, 11)
-                    
-                }
-                .padding()
-                .frame(width: UIScreen.main.bounds.width)
-                Spacer()
+                        .frame(height: 40)
+                    }
+                }.padding(.trailing, 11)
+                
             }
+            .padding()
+            .frame(width: UIScreen.main.bounds.width)
+            ZStack {
+                BackgroundView(isTapped: $isTapped, isVibrationOn: $isVibrationOn, isAnimationOn: $isAnimationOn, isFlashingColorsOn: $isFlashingColorsOn, selectedTheme: $selectedTheme, isCountTextBlack: $isCountTextBlack, selectedColor: $selectedColor)
+                    .onTapGesture {
+                        mainTapActions()
+                    }
+                
+                ZStack {
+                    CountTextBackground(isAnimationOn: $isAnimationOn, isTapped: $isTapped, selectedTextBackgroundTheme: $selectedTextBackgroundTheme, isCountTextBlack: (selectedTheme == .lightTheme ? .constant(false) : $isCountTextBlack), isInterval1Reached: $isInterval1Reached, isInterval2Reached: $isInterval2Reached)
+                    Text("\(count)")
+                        .font(.custom("Karantina", size: 200)).minimumScaleFactor(0.2).lineLimit(1).frame(maxWidth: 220)
+                        .foregroundColor((selectedTheme == .lightTheme) ? .white : (isCountTextBlack ? .black : .white))
+                }
+            }
+            .onChange(of: count) { newValue in
+                checkIntervals(newValue)
+            }
+        }
+        ZStack {
+            
         }
         .onChange(of: count) { newValue in
             checkIntervals(newValue)
@@ -136,7 +140,7 @@ struct ContentView: View {
             count = 0
         }
 
-    private func setupVolumeButtonListener() {
+    private func mainTapActions() {
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setActive(true)
