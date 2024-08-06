@@ -36,6 +36,8 @@
 		5E9AA8312C59A7C4007D0E6A /* BlackBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9AA8302C59A7C4007D0E6A /* BlackBackgroundView.swift */; };
 		5E9AA8332C5AFC99007D0E6A /* HistoryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9AA8322C5AFC99007D0E6A /* HistoryRecord.swift */; };
 		5E9AA8352C5AFCD0007D0E6A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9AA8342C5AFCD0007D0E6A /* HistoryView.swift */; };
+		5ECCE9082C62DB5900BDDD52 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECCE9072C62DB5900BDDD52 /* SnapshotView.swift */; };
+		5ECCE90A2C62DB9100BDDD52 /* ShareableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECCE9092C62DB9100BDDD52 /* ShareableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		5E9AA8302C59A7C4007D0E6A /* BlackBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBackgroundView.swift; sourceTree = "<group>"; };
 		5E9AA8322C5AFC99007D0E6A /* HistoryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRecord.swift; sourceTree = "<group>"; };
 		5E9AA8342C5AFCD0007D0E6A /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		5ECCE9072C62DB5900BDDD52 /* SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotView.swift; sourceTree = "<group>"; };
+		5ECCE9092C62DB9100BDDD52 /* ShareableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,8 @@
 				5E700A022C56652F007671B2 /* BackgroundTheme.swift */,
 				5E700A042C566621007671B2 /* TextBackgroundTheme.swift */,
 				5E9AA8322C5AFC99007D0E6A /* HistoryRecord.swift */,
+				5ECCE9072C62DB5900BDDD52 /* SnapshotView.swift */,
+				5ECCE9092C62DB9100BDDD52 /* ShareableView.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ECCE9082C62DB5900BDDD52 /* SnapshotView.swift in Sources */,
 				5E7009E52C51BEB8007671B2 /* AnimatedColorBackgroundView.swift in Sources */,
 				5E0A52062C5FB42700FCA02A /* ShareSocialMediaView.swift in Sources */,
 				5E7009F02C52EFBD007671B2 /* FlashingBWBackgroundView.swift in Sources */,
@@ -365,6 +372,7 @@
 				5E7009EC2C51C83D007671B2 /* IntervalSelectionButton.swift in Sources */,
 				5E9AA82D2C59A79D007D0E6A /* SingleColorBackgroundView.swift in Sources */,
 				5E9AA8352C5AFCD0007D0E6A /* HistoryView.swift in Sources */,
+				5ECCE90A2C62DB9100BDDD52 /* ShareableView.swift in Sources */,
 				5E7009BB2C51BE69007671B2 /* CounterApp.swift in Sources */,
 				5E7009FA2C566360007671B2 /* CircleTextBackground.swift in Sources */,
 				5E9AA82F2C59A7B2007D0E6A /* WhiteBackgroundView.swift in Sources */,
@@ -605,6 +613,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 825J9M86RF;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app requires access to your photo library to save images";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rony.CounterTests;
@@ -625,6 +634,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 825J9M86RF;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app requires access to your photo library to save images";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rony.CounterTests;

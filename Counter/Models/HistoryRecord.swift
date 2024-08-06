@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-struct HistoryRecord: Identifiable, Codable {
-    let id = UUID()
+import Foundation
+
+struct HistoryRecord: Identifiable, Codable, Hashable {
+    var id = UUID() // Ensure each record has a unique identifier
     var count: Int
     var date: Date
     var name: String
+
+    // Automatic synthesis of Hashable
 }
+
 
