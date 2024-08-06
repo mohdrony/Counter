@@ -9,36 +9,35 @@ import SwiftUI
 
 struct HistoryView: View {
     @Binding var historyRecords: [HistoryRecord]
-//    let onSelectRecord: (HistoryRecord) -> Void
-
+    @Binding var count: Int
+    @Environment(\.dismiss) private var dismiss
     @State private var editMode = EditMode.inactive
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                ForEach(historyRecords.indices, id: \.self) { index in
-                    
-                    NavigationLink{ShareSocialMediaView(historyRecord: historyRecords[index]){ selectedRecord in
-                        count = selectedRecord.count
-                        isHistoryViewShowing = false
-                    }} label:{
-                        HStack{
+                ForEach(historyRecords) { record in
+                    NavigationLink(value: record) {
+                        HStack {
                             VStack(alignment: .leading) {
-                                TextField("Name", text: $historyRecords[index].name)
+                                TextField("Name", text: $historyRecords[historyRecords.firstIndex(where: { $0.id == record.id })!].name)
                                     .font(.subheadline).bold()
                                     .disabled(editMode == .inactive)
-                                Text("Date: \(historyRecords[index].date.formatted())")
+                                Text("Date: \(record.date.formatted())")
                                     .font(.subheadline)
-                            }.foregroundColor(editMode == .active ? .blue : .black)
+                            }
+                            .foregroundColor(editMode == .active ? .blue : .black)
                             
-                            ZStack{
+                            ZStack {
                                 Circle().fill(.white).frame(width: 50)
-                                Text("\(historyRecords[index].count)")
-                                    .font(.custom("Karantina", size: 40)).minimumScaleFactor(0.2).lineLimit(1).frame(maxWidth: 45)
+                                Text("\(record.count)")
+                                    .font(.custom("Karantina", size: 40))
+                                    .minimumScaleFactor(0.2)
+                                    .lineLimit(1)
+                                    .frame(maxWidth: 45)
                             }
                         }
                     }
-                    
                 }
                 .onDelete { indices in
                     historyRecords.remove(atOffsets: indices)
@@ -58,6 +57,13 @@ struct HistoryView: View {
                 }
             }
             .environment(\.editMode, $editMode)
+            .navigationDestination(for: HistoryRecord.self) { record in
+                ShareSocialMediaView(
+                    count: $count,
+                    historyRecord: record,
+                    onDismiss: { dismiss() } // Convert DismissAction to () -> Void
+                )
+            }
         }
     }
 
@@ -68,7 +74,6 @@ struct HistoryView: View {
     }
 }
 
-// Custom date formatter for displaying the date in HistoryView
 extension Date {
     func formatted() -> String {
         let formatter = DateFormatter()
@@ -78,14 +83,13 @@ extension Date {
     }
 }
 
+
 #Preview {
     HistoryView(
         historyRecords: .constant([
             HistoryRecord(count: 30, date: Date(), name: "Record 1"),
             HistoryRecord(count: 50, date: Date().addingTimeInterval(-86400), name: "Record 2")
-        ]),
-        onSelectRecord: { record in
-            print("Selected record: \(record.name), Count: \(record.count)")
-        }
+        ]), count: .constant(20)
+        
     )
 }

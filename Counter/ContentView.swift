@@ -126,7 +126,7 @@ struct ContentView: View {
             )
         }
         .sheet(isPresented: $isHistoryViewShowing) {
-                    HistoryView(historyRecords: $historyRecords)
+            HistoryView(historyRecords: $historyRecords, count: $count)
                 }
     }
 
