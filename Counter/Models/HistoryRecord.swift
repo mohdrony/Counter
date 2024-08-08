@@ -14,6 +14,9 @@ struct HistoryRecord: Identifiable, Codable, Hashable {
     var count: Int
     var date: Date
     var name: String
+    var backgroundTheme: BackgroundTheme
+    var textBackgroundTheme: TextBackgroundTheme
+    var isCountTextBlack: Bool
 
     // Automatic synthesis of Hashable
 }

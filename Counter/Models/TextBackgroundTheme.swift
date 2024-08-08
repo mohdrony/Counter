@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TextBackgroundTheme: String, Identifiable, CaseIterable {
+enum TextBackgroundTheme: String, Identifiable, CaseIterable, Codable {
     case circleTextBackground
     case roundedRectangleTheme
     case polygonTheme

@@ -19,12 +19,17 @@ struct ShareableView: View {
                     isVibrationOn: .constant(false),
                     isAnimationOn: .constant(true),
                     isFlashingColorsOn: .constant(true),
-                    selectedTheme: .constant(.animatedColorTheme),
+                    selectedTheme: .constant(historyRecord.backgroundTheme),
                     isCountTextBlack: .constant(true),
                     selectedColor: .constant(.green)
                 )
                 .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width - 50)
-                
+//                ForEach(0..<historyRecord.count){index in
+//                    Circle()
+//                        .stroke(Color.white, lineWidth: CGFloat(Double(index)*1))
+//                        .frame(width: 100 + CGFloat(Double(index)*30))
+////                        .opacity(Double(index/historyRecord.count) * 100)
+//                }
                 VStack {
                     Spacer()
                     Text("\(historyRecord.name)")
@@ -34,29 +39,31 @@ struct ShareableView: View {
                 .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width - 50)
                 
                 ZStack(alignment: .center) {
-                    CircleTextBackground(
-                        isAnimationOn: .constant(true),
-                        isTapped: .constant(true),
-                        isInterval1Reached: .constant(true),
-                        isInterval2Reached: .constant(false),
-                        isCountTextBlack: .constant(true)
-                    )
-                    Circle().fill(Color.clear)
-                    AnimatedCircle(
-                        animationDuration: 1,
-                        isCountTextBlack: .constant(true),
-                        isInterval1Reached: .constant(false),
-                        isInterval2Reached: .constant(false)
-                    )
+                    CountTextBackground(isAnimationOn: .constant(true), isTapped: .constant(true), selectedTextBackgroundTheme: .constant(historyRecord.textBackgroundTheme), isCountTextBlack: .constant(historyRecord.isCountTextBlack), isInterval1Reached: .constant(false), isInterval2Reached: .constant(false))
+                        .scaleEffect(0.5)
+//                    CircleTextBackground(
+//                        isAnimationOn: .constant(true),
+//                        isTapped: .constant(true),
+//                        isInterval1Reached: .constant(true),
+//                        isInterval2Reached: .constant(false),
+//                        isCountTextBlack: .constant(true)
+//                    )
+                    
+//                    AnimatedCircle(
+//                        animationDuration: 1,
+//                        isCountTextBlack: .constant(true),
+//                        isInterval1Reached: .constant(false),
+//                        isInterval2Reached: .constant(false)
+//                    )
                     
                     Text("\(historyRecord.count)")
-                        .font(.custom("Karantina", size: 200))
+                        .font(.custom("Karantina", size: 100))
                         .minimumScaleFactor(0.2)
                         .lineLimit(1)
                         .frame(maxWidth: 220)
-                        .foregroundColor(.black)
+                        .foregroundColor(historyRecord.isCountTextBlack ? .black : .white)
                 }
-                .scaleEffect(0.5)
+                
                 .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width - 50)
             }
             .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
@@ -66,7 +73,7 @@ struct ShareableView: View {
 
 struct ShareableView_Previews: PreviewProvider {
     static var previews: some View {
-        ShareableView(historyRecord: HistoryRecord(count: 100, date: Date(), name: "Sample Record"))
+        ShareableView(historyRecord: HistoryRecord(count: 100, date: Date(), name: "Sample Record", backgroundTheme: .animatedBWTheme, textBackgroundTheme: .polygonTheme, isCountTextBlack: true))
     }
 }
 

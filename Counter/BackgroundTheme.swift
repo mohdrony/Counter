@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum BackgroundTheme: String, Identifiable, CaseIterable {
+enum BackgroundTheme: String, Identifiable, CaseIterable, Codable {
     case animatedColorTheme
     case animatedBWTheme
     case flashingColorTheme

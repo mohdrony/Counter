@@ -23,18 +23,22 @@ struct HistoryView: View {
                                 TextField("Name", text: $historyRecords[historyRecords.firstIndex(where: { $0.id == record.id })!].name)
                                     .font(.subheadline).bold()
                                     .disabled(editMode == .inactive)
+                                    .foregroundColor(.primary) // Automatically adjusts for light/dark mode
                                 Text("Date: \(record.date.formatted())")
                                     .font(.subheadline)
+                                    .foregroundColor(.secondary) // Automatically adjusts for light/dark mode
                             }
-                            .foregroundColor(editMode == .active ? .blue : .black)
                             
                             ZStack {
-                                Circle().fill(.white).frame(width: 50)
+                                Circle()
+                                    .fill(Color(UIColor.systemBackground)) // Automatically adjusts for light/dark mode
+                                    .frame(width: 50)
                                 Text("\(record.count)")
                                     .font(.custom("Karantina", size: 40))
                                     .minimumScaleFactor(0.2)
                                     .lineLimit(1)
                                     .frame(maxWidth: 45)
+                                    .foregroundColor(.primary) // Automatically adjusts for light/dark mode
                             }
                         }
                     }
@@ -87,9 +91,10 @@ extension Date {
 #Preview {
     HistoryView(
         historyRecords: .constant([
-            HistoryRecord(count: 30, date: Date(), name: "Record 1"),
-            HistoryRecord(count: 50, date: Date().addingTimeInterval(-86400), name: "Record 2")
+            HistoryRecord(count: 30, date: Date(), name: "Record 1", backgroundTheme: .animatedColorTheme, textBackgroundTheme: .circleTextBackground, isCountTextBlack: true),
+            HistoryRecord(count: 50, date: Date().addingTimeInterval(-86400), name: "Record 2", backgroundTheme: .animatedColorTheme, textBackgroundTheme: .circleTextBackground, isCountTextBlack: true)
         ]), count: .constant(20)
         
     )
 }
+

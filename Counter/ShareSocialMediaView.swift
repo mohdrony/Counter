@@ -118,7 +118,7 @@ struct ShareSocialMediaView: View {
 }
 
 #Preview {
-    ShareSocialMediaView(count: .constant(40), historyRecord: HistoryRecord(count: 42, date: Date(), name: "Sample Record"), onDismiss: {})
+    ShareSocialMediaView(count: .constant(40), historyRecord: HistoryRecord(count: 42, date: Date(), name: "Sample Record", backgroundTheme: .animatedBWTheme, textBackgroundTheme: .circleTextBackground, isCountTextBlack: true), onDismiss: {})
 }
 
 struct SocialMediaButton: View {

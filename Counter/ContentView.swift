@@ -83,7 +83,11 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
                         }
-                        .frame(height: 40)
+                        .overlay {
+                            Circle()
+                                .stroke(Color.white, lineWidth: 2)
+                                .foregroundColor(.green)
+                        }.frame(height: 40)
                     }
                     Button(action: {
                         isHistoryViewShowing.toggle()
@@ -94,7 +98,11 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .foregroundColor((selectedTheme == .lightTheme || !isCountTextBlack) ? .black : .white)
                         }
-                        .frame(height: 40)
+                        .overlay {
+                            Circle()
+                                .stroke(Color.white, lineWidth: 2)
+                                .foregroundColor(.green)
+                        }.frame(height: 40)
                     }
                 }.padding(.trailing, 11)
                 
@@ -131,7 +139,7 @@ struct ContentView: View {
     }
 
     private func resetCount() {
-            let newRecord = HistoryRecord(count: count, date: Date(), name: "Record \(historyRecords.count + 1)")
+            let newRecord = HistoryRecord(count: count, date: Date(), name: "Record \(historyRecords.count + 1)", backgroundTheme: selectedTheme, textBackgroundTheme: selectedTextBackgroundTheme, isCountTextBlack: isCountTextBlack)
             historyRecords.append(newRecord)
             saveHistory()
             count = 0

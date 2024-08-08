@@ -35,6 +35,7 @@ struct AnimatedCircle: View {
     @State private var width: CGFloat = 250
     @State private var lineWidth: CGFloat = 0
     @State private var opacity: Double = 1.0
+    @State private var endOpacity: Double = 0.0
     let animationDuration: TimeInterval
     @Binding var isCountTextBlack : Bool
     @Binding var isInterval1Reached : Bool
