@@ -11,18 +11,13 @@ import UIKit
 struct ShareSocialMediaView: View {
     @Binding var count: Int
     var historyRecord: HistoryRecord
+    @State private var isImageSaveScreenActivated = false
     var onDismiss: () -> Void
 
     @State private var capturedImage: UIImage?
 
     var body: some View {
-        VStack {
-//            if let capturedImage = capturedImage {
-//                Image(uiImage: capturedImage)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
-//                    .padding(.bottom, 50)
-//            } else {
+            VStack {
                 ShareableView(historyRecord: historyRecord)
                     .padding(.bottom, 50)
                     .background(GeometryReader { geometry in
@@ -30,46 +25,68 @@ struct ShareSocialMediaView: View {
                             captureView(viewSize: geometry.size)
                         }
                     })
-            
-
-            HStack {
-                SocialMediaButton(title: "Facebook", imageName: "facebookLogo") {
-                    shareImageToSocialMedia(platform: "Facebook")
-                }
-                SocialMediaButton(title: "Instagram", imageName: "instagramLogo") {
-                    shareImageToSocialMedia(platform: "Instagram")
-                }
-                SocialMediaButton(title: "X", imageName: "xLogo") {
-                    shareImageToSocialMedia(platform: "X")
-                }
-                Button(action: {
-                    if let capturedImage = capturedImage {
-                        saveImageToPhotoLibrary(capturedImage)
+                
+                HStack(spacing: 10) {
+                    
+                    Button(action: {
+                        if let image = capturedImage {
+                            shareToSocialMedia(image)
+                        }
+                    }) {
+                        ZStack{
+                            Group{
+                                Image("facebookLogo").resizable().aspectRatio(contentMode: .fit)
+                                    .frame(width: 50)
+                                    .rotationEffect(Angle(degrees: -30))
+                                    .offset(x: -40, y: 10)
+                                    .blur(radius: 5)
+                                Image("instagramLogo").resizable().aspectRatio(contentMode: .fit)
+                                    .frame(width: 100)
+                                    .rotationEffect(Angle(degrees: -30))
+                                    .offset(x: 50, y: 10)
+                                    .blur(radius: 10)
+                                Image("xLogo").resizable().aspectRatio(contentMode: .fit)
+                                    .frame(width: 30)
+                                    .rotationEffect(Angle(degrees: -30))
+                                    .offset(x: -30, y: -10)
+                                    .blur(radius: 4)
+                            }
+                            Image(systemName: "square.and.arrow.up")
+                                .frame(width: 70, height: 70)
+                        }.frame(width: (UIScreen.main.bounds.width-60)/2, height: 50)
+                            .cornerRadius(25)
                     }
+                    Button(action: {
+                        isImageSaveScreenActivated = true
+                    }) {
+                        ZStack{
+                            Image(systemName: "square.and.arrow.down")
+                                .frame(width: 70, height: 70)
+                        }.frame(width: (UIScreen.main.bounds.width-60)/2, height: 50)
+                            .cornerRadius(25)
+                    }
+                    
+                }
+                .padding(.bottom, 50)
+                
+                Button(action: {
+                    count = historyRecord.count
+                    onDismiss()
                 }) {
-                    Image(systemName: "square.and.arrow.up")
+                    Text("Continue")
+                        .bold()
                         .padding()
-                        .cornerRadius(10)
-                        .frame(width: 70, height: 70)
+                        .frame(width: UIScreen.main.bounds.width - 25)
+                        .background(Color.black.opacity(0.1))
+                        .cornerRadius(25)
                 }
             }
-            .frame(width: UIScreen.main.bounds.width - 25)
-            .background(Color.black.opacity(0.1))
-            .cornerRadius(25)
-            .padding(.bottom, 50)
-
-            Button(action: {
-                count = historyRecord.count
-                onDismiss()
-            }) {
-                Text("Continue")
-                    .bold()
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width - 25)
-                    .background(Color.black.opacity(0.1))
-                    .cornerRadius(25)
+            .edgesIgnoringSafeArea(.bottom)
+            .sheet(isPresented: $isImageSaveScreenActivated){
+                if let capturedImage = capturedImage {
+                    SaveImageView(capturedImage: capturedImage, isImageSaveScreenActivated:$isImageSaveScreenActivated)
+                }
             }
-        }
     }
 
     private func captureView(viewSize: CGSize) {
@@ -79,10 +96,9 @@ struct ShareSocialMediaView: View {
 
         let hostingController = UIHostingController(rootView: snapshotView)
         let view = hostingController.view!
-
         view.frame = CGRect(origin: .zero, size: viewSize)
+        
         let renderer = UIGraphicsImageRenderer(size: viewSize)
-
         let image = renderer.image { context in
             view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         }
@@ -92,33 +108,21 @@ struct ShareSocialMediaView: View {
         }
     }
 
-    private func saveImageToPhotoLibrary(_ image: UIImage) {
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+    private func shareToSocialMedia(_ image: UIImage) {
+        let message = "Check out my score! #CounterApp"
+        let activityViewController = UIActivityViewController(activityItems: [image, message], applicationActivities: nil)
+        
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceView = UIApplication.shared.windows.first?.rootViewController?.view
+            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
         if let viewController = UIApplication.shared.windows.first?.rootViewController {
-            if let presentedVC = viewController.presentedViewController {
-                presentedVC.present(activityViewController, animated: true, completion: nil)
-            } else {
-                viewController.present(activityViewController, animated: true, completion: nil)
-            }
+            viewController.present(activityViewController, animated: true, completion: nil)
         }
     }
-
-    private func shareImageToSocialMedia(platform: String) {
-        if let image = capturedImage {
-            let activityViewController = UIActivityViewController(activityItems: [image, "Check out my score! #CounterApp", URL(string: "https://apps.apple.com/de/app/einb%C3%BCrgerungstest/id6470721198?l=en-GB")!], applicationActivities: nil)
-            if let viewController = UIApplication.shared.windows.first?.rootViewController {
-                if let presentedVC = viewController.presentedViewController {
-                    presentedVC.present(activityViewController, animated: true, completion: nil)
-                } else {
-                    viewController.present(activityViewController, animated: true, completion: nil)
-                }
-            }
-        }
-    }
-}
-
-#Preview {
-    ShareSocialMediaView(count: .constant(40), historyRecord: HistoryRecord(count: 42, date: Date(), name: "Sample Record", backgroundTheme: .animatedBWTheme, textBackgroundTheme: .circleTextBackground, isCountTextBlack: true), onDismiss: {})
+    
 }
 
 struct SocialMediaButton: View {
@@ -138,5 +142,10 @@ struct SocialMediaButton: View {
         }
     }
 }
+
+#Preview {
+    ShareSocialMediaView(count: .constant(40), historyRecord: HistoryRecord(count: 42, date: Date(), name: "Sample Record", backgroundTheme: .animatedBWTheme, textBackgroundTheme: .circleTextBackground, isCountTextBlack: true), onDismiss: {})
+}
+
 
 
