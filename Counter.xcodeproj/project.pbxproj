@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5E0A52062C5FB42700FCA02A /* ShareSocialMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A52052C5FB42700FCA02A /* ShareSocialMediaView.swift */; };
+		5E3C65622C714E5400DA416E /* ShareableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C65602C714E5400DA416E /* ShareableView.swift */; };
+		5E3C65632C714E5400DA416E /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3C65612C714E5400DA416E /* SnapshotView.swift */; };
 		5E7009BB2C51BE69007671B2 /* CounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7009BA2C51BE69007671B2 /* CounterApp.swift */; };
 		5E7009BD2C51BE69007671B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7009BC2C51BE69007671B2 /* ContentView.swift */; };
 		5E7009BF2C51BE6C007671B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E7009BE2C51BE6C007671B2 /* Assets.xcassets */; };
@@ -36,8 +38,6 @@
 		5E9AA8312C59A7C4007D0E6A /* BlackBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9AA8302C59A7C4007D0E6A /* BlackBackgroundView.swift */; };
 		5E9AA8332C5AFC99007D0E6A /* HistoryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9AA8322C5AFC99007D0E6A /* HistoryRecord.swift */; };
 		5E9AA8352C5AFCD0007D0E6A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9AA8342C5AFCD0007D0E6A /* HistoryView.swift */; };
-		5ECCE9082C62DB5900BDDD52 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECCE9072C62DB5900BDDD52 /* SnapshotView.swift */; };
-		5ECCE90A2C62DB9100BDDD52 /* ShareableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECCE9092C62DB9100BDDD52 /* ShareableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +59,8 @@
 
 /* Begin PBXFileReference section */
 		5E0A52052C5FB42700FCA02A /* ShareSocialMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSocialMediaView.swift; sourceTree = "<group>"; };
+		5E3C65602C714E5400DA416E /* ShareableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareableView.swift; path = Counter/ShareableView.swift; sourceTree = SOURCE_ROOT; };
+		5E3C65612C714E5400DA416E /* SnapshotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotView.swift; path = Counter/SnapshotView.swift; sourceTree = SOURCE_ROOT; };
 		5E7009B72C51BE69007671B2 /* Counter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Counter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E7009BA2C51BE69007671B2 /* CounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterApp.swift; sourceTree = "<group>"; };
 		5E7009BC2C51BE69007671B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,8 +93,6 @@
 		5E9AA8302C59A7C4007D0E6A /* BlackBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBackgroundView.swift; sourceTree = "<group>"; };
 		5E9AA8322C5AFC99007D0E6A /* HistoryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRecord.swift; sourceTree = "<group>"; };
 		5E9AA8342C5AFCD0007D0E6A /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		5ECCE9072C62DB5900BDDD52 /* SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotView.swift; sourceTree = "<group>"; };
-		5ECCE9092C62DB9100BDDD52 /* ShareableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +120,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E3C655F2C714E0300DA416E /* SmallViews */ = {
+			isa = PBXGroup;
+			children = (
+				5E3C65602C714E5400DA416E /* ShareableView.swift */,
+				5E3C65612C714E5400DA416E /* SnapshotView.swift */,
+			);
+			name = SmallViews;
+			path = CountText/SmallViews;
+			sourceTree = "<group>";
+		};
 		5E7009AE2C51BE69007671B2 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 				5E7009E82C51C5AE007671B2 /* Karantina.ttf */,
 				5E7009E62C51C0D0007671B2 /* SettingsView.swift */,
 				5E7009F72C566215007671B2 /* CountTextBackground.swift */,
+				5E3C655F2C714E0300DA416E /* SmallViews */,
 				5E7009F62C5661F6007671B2 /* CountText */,
 				5E7009F32C565E62007671B2 /* BackgroundView.swift */,
 				5E7009F52C5661DB007671B2 /* Backgrounds */,
@@ -220,8 +231,6 @@
 				5E700A022C56652F007671B2 /* BackgroundTheme.swift */,
 				5E700A042C566621007671B2 /* TextBackgroundTheme.swift */,
 				5E9AA8322C5AFC99007D0E6A /* HistoryRecord.swift */,
-				5ECCE9072C62DB5900BDDD52 /* SnapshotView.swift */,
-				5ECCE9092C62DB9100BDDD52 /* ShareableView.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,7 +373,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ECCE9082C62DB5900BDDD52 /* SnapshotView.swift in Sources */,
 				5E7009E52C51BEB8007671B2 /* AnimatedColorBackgroundView.swift in Sources */,
 				5E0A52062C5FB42700FCA02A /* ShareSocialMediaView.swift in Sources */,
 				5E7009F02C52EFBD007671B2 /* FlashingBWBackgroundView.swift in Sources */,
@@ -372,16 +380,17 @@
 				5E7009EC2C51C83D007671B2 /* IntervalSelectionButton.swift in Sources */,
 				5E9AA82D2C59A79D007D0E6A /* SingleColorBackgroundView.swift in Sources */,
 				5E9AA8352C5AFCD0007D0E6A /* HistoryView.swift in Sources */,
-				5ECCE90A2C62DB9100BDDD52 /* ShareableView.swift in Sources */,
 				5E7009BB2C51BE69007671B2 /* CounterApp.swift in Sources */,
 				5E7009FA2C566360007671B2 /* CircleTextBackground.swift in Sources */,
 				5E9AA82F2C59A7B2007D0E6A /* WhiteBackgroundView.swift in Sources */,
+				5E3C65632C714E5400DA416E /* SnapshotView.swift in Sources */,
 				5E7009FE2C5663F3007671B2 /* RandomPolyTextBackground.swift in Sources */,
 				5E7009EE2C52EC29007671B2 /* FlashingColorBackgroundView.swift in Sources */,
 				5E7009E72C51C0D0007671B2 /* SettingsView.swift in Sources */,
 				5E9AA82B2C59A44C007D0E6A /* AnimatedBWColorBackgroundView.swift in Sources */,
 				5E9AA8312C59A7C4007D0E6A /* BlackBackgroundView.swift in Sources */,
 				5E7009F42C565E62007671B2 /* BackgroundView.swift in Sources */,
+				5E3C65622C714E5400DA416E /* ShareableView.swift in Sources */,
 				5E7009F82C566215007671B2 /* CountTextBackground.swift in Sources */,
 				5E700A002C5664ED007671B2 /* UtilityCodes.swift in Sources */,
 				5E700A052C566621007671B2 /* TextBackgroundTheme.swift in Sources */,
